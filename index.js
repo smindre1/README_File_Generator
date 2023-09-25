@@ -22,7 +22,7 @@ inquirer
     {
       type: "rawlist",
       message: "Would you like to include a 'Table of Contents'?",
-      name: tableOfContents,
+      name: "tableOfContents",
       choices: ["Yes", "No"],
     },
     {
@@ -70,7 +70,7 @@ inquirer
     {
       type: "input",
       message: "How do you conduct tests with your code? Describe how someone can go about conducting tests on your app if you included them.",
-      name: "tests",
+      name: "test",
     },
   ])
   .then((answers) => {
@@ -78,10 +78,9 @@ inquirer
   });
 
 const generateREADME = (obj) => {
-  const { title, creatorName, description } = obj;
-  const dataFile =
-    //I need to fill out the README's internal structure here
-    `
+  const { title, creatorName, description, tableOfContents, installation, usage, screenshots, credits, license, badges, features, contribute, test } = obj;
+  //The README's internal structure
+  const dataFile = `
   # ${title}
 
   By ${creatorName}
@@ -94,19 +93,37 @@ const generateREADME = (obj) => {
   
   ## Installation
 
+  ${installation}
+
   ## Usage
+
+  ${usage}
+  ${screenshots}
 
   ## Credits
 
+  ${credits}
+
   ## License
+
+  ${license}
 
   ## Badges
 
+  ${badges}
+
   ## Features
+
+  ${features}
 
   ## How to Contribute
 
+  ${contribute}
+
   ## Tests
+
+  ${test}
+
   `;
   return dataFile;
 };
