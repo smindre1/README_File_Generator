@@ -74,13 +74,16 @@ inquirer
     },
   ])
   .then((answers) => {
+    //This calls the generateREADME function using the user's answers for the file's content.
     fs.writeFile("README.md", generateREADME(answers), "utf8", (err) => (err ? console.log("error") : console.log("File written successfully")));
   });
 
+//The function that generates the README file
 const generateREADME = (obj) => {
   const { title, creatorName, description, tableOfContents, installation, usage, screenshots, credits, license, badges, features, contribute, test } = obj;
   let contentTable = "";
   let images = "";
+  //Checks if the user wanted a Table of Contents and if they did it adds the necesary content.
   if (tableOfContents == "Yes") {
     contentTable = `
 ## Table of Contents
@@ -95,6 +98,7 @@ const generateREADME = (obj) => {
 - [Tests](#tests)
 `;
   }
+  //Checks if the user wanted to include a Screenshot and if they did it adds the necesary content.
   if (screenshots == "Yes") {
     images = `
 ![alt image](assets/images/screenshot.png)
