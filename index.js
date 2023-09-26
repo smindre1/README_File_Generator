@@ -27,7 +27,7 @@ inquirer
     },
     {
       type: "input",
-      message: "What are the steps required to install your project??",
+      message: "What are the steps required to install your project?",
       name: "installation",
     },
     {
@@ -79,51 +79,70 @@ inquirer
 
 const generateREADME = (obj) => {
   const { title, creatorName, description, tableOfContents, installation, usage, screenshots, credits, license, badges, features, contribute, test } = obj;
+  let contentTable = "";
+  let images = "";
+  if (tableOfContents == "Yes") {
+    contentTable = `
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [Badges](#badges)
+- [Features](#features)
+- [How To Contribute](#contribute)
+- [Tests](#tests)
+`;
+  }
+  if (screenshots == "Yes") {
+    images = `
+![alt image](assets/images/screenshot.png)
+`;
+  }
   //The README's internal structure
   const dataFile = `
-  # ${title}
+# ${title}
 
-  By ${creatorName}
+By ${creatorName}
 
-  ## Description
-  
-  ${description}
-  
-  ## Table of Contents
-  
-  ## Installation
+## Description
 
-  ${installation}
+${description}
+${contentTable}
+## Installation
 
-  ## Usage
+${installation}
 
-  ${usage}
-  ${screenshots}
+## Usage
 
-  ## Credits
+${usage}
+${images}
 
-  ${credits}
+## Credits
 
-  ## License
+${credits}
 
-  ${license}
+## License
 
-  ## Badges
+${license}
 
-  ${badges}
+## Badges
 
-  ## Features
+${badges}
 
-  ${features}
+## Features
 
-  ## How to Contribute
+${features}
 
-  ${contribute}
+## How to Contribute <a id="contribute"></a>
 
-  ## Tests
+${contribute}
 
-  ${test}
+## Tests
 
-  `;
+${test}
+
+`;
   return dataFile;
 };
